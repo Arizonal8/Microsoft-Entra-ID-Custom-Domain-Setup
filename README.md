@@ -1,58 +1,46 @@
 # Microsoft Entra ID – Custom Domain Setup
 
-## Why this matters
+## Purpose
 
-A custom domain (`@yourcompany.com`) replaces the default `onmicrosoft.com` for user sign-ins. This is required for brand consistency and is a core exam topic.
-
----
+A custom domain (`@arizaylab.tech`) was configured for a Microsoft Entra ID tenant to replace the default `onmicrosoft.com` domain for user sign-ins.
 
 ## Tools used
 
 - Microsoft Entra ID (Azure portal)
-- Hostinger (domain registrar – any registrar works)
+- Hostinger (domain registrar)
 
----
+## Steps completed
 
-## Steps
+### 1. Domain purchase
+The domain `arizaylab.tech` was purchased from Hostinger.
 
-### 1. Add custom domain in Entra ID
-- **Microsoft Entra ID** → **Domain names** → **Add custom domain**
-- Enter your domain (e.g., `arizaylab.tech`)
+### 2. Domain added to Entra ID
+Navigated to **Microsoft Entra ID** → **Domain names** → **Add custom domain**. Entered `arizaylab.tech`.
 
-### 2. Copy the TXT record from Azure
-- Azure generates a value like `MS=ms16837434`
-- Record type: `TXT`
-- Host/Name: `@`
+### 3. Verification record generated
+Azure provided the following TXT record details:
+- Type: `TXT`
+- Name/Host: `@`
+- Value: `MS=ms16837434`
 - TTL: `3600`
 
-### 3. Add the TXT record at your registrar
-- Log into your registrar (Hostinger, GoDaddy, etc.)
-- Go to DNS settings → Add TXT record using the values from step 2
-- Save
+### 4. TXT record added at registrar
+Logged into Hostinger, opened the DNS Zone Editor for `arizaylab.tech`, and added a TXT record with the exact values above.
 
-### 4. Wait for DNS propagation
-- Takes 15–30 minutes (sometimes longer)
+### 5. DNS propagation wait
+Approximately 30 minutes were allowed for the DNS change to propagate.
 
-### 5. Verify in Azure
-- Back in **Domain names** → Click **Verify**
-- Status changes from *Unverified* to *Verified*
+### 6. Domain verified in Azure
+Returned to **Domain names** in Entra ID and clicked **Verify** for `arizaylab.tech`. Status changed from *Unverified* to *Verified*.
 
-### 6. (Optional) Set as primary
-- Click the verified domain → **Set as primary**
-- New users get `user@yourdomain.com`
+### 7. Primary domain set (optional)
+Clicked on the verified domain and selected **Set as primary**. New users now receive usernames ending with `@arizaylab.tech`.
 
----
+### 8. Test user created
+A test user named `User1` was created with the user principal name `User1@arizaylab.tech` to confirm functionality.
 
-## Verification check
+## Verification results
 
-- [ ] Domain shows **Verified** in Entra ID
-- [ ] Test user created with `@yourdomain.com` UPN
-- [ ] User can sign in (if tested)
-
----
-
-## Exam note
-
-- Verification uses **TXT** or **MX** record
-- DNS changes are not instant – propagation delay is normal
-- Domain must be verified before setting as primary
+- Custom domain shows **Verified** in Entra ID.
+- Users can be created with the custom domain.
+- Tenant now supports branded sign-ins.
